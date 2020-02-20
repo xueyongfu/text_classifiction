@@ -24,6 +24,7 @@ def separate_dataset(trainset, ratio = 0.5):
     for i in range(len(trainset.data)):
         data_ = trainset.data[i].split('\n')
         data_ = list(filter(None, data_))
+#         random.sample(data, n) n是抽样的数据
         data_ = random.sample(data_, int(len(data_) * ratio))
         for n in range(len(data_)):
             data_[n] = clearstring(data_[n])
@@ -35,6 +36,7 @@ def separate_dataset(trainset, ratio = 0.5):
 
 def build_dataset(words, n_words):
     count = [['GO', 0], ['PAD', 1], ['EOS', 2], ['UNK', 3]]
+#     Counter数数, most_common返回查过出现频次的词
     count.extend(collections.Counter(words).most_common(n_words - 1))
     dictionary = dict()
     for word, _ in count:
